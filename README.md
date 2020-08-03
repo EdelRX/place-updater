@@ -1,4 +1,4 @@
-###### **Place Updater**
+## **Place Updater**
 
 I have completed this exercise as first step of the remote coding challenge sent to me by VAKT  part of their recruitment process for the Mid-Senior Java Developer position. 
 
@@ -14,7 +14,7 @@ Purpose of this exercise to write a Java program ideally using spring boot to cr
 Output csv always contains full set of data i.e. unchanged and changed. To limit the scope of this exercise any addition or deletion of rows in vendor csv can be ignored.
 
 
-###### **Assumptions**
+## **Assumptions**
 
 I have created a full Spring Boot microservice written in Java programming language serving under a REST controller interface. To make the data handling easier and even more realistic I have added an embedded H2 database. Company's initial data is loaded onto the database upon the application's initialization. A set of unit tests have also been included, asserting a total line coverage of 80%, method coverage of an 83%, and class coverage of a 75%.
 
@@ -22,9 +22,9 @@ I encountered several issues while developing the required features which I prom
 
 - The exercise description read as "UNLOCCODE without any spaces is to be used to match the records for comparison, if UNLOCCODE is missing then Place name is to be used for comparison." However, I found that the UNLOCCODE field wasn't always unique for each individual record. Meaning that a vendor could provide a certain UNLOCCODE value that would match against several distinct records making it difficult to know which one is being referred to. Thus I made the search by "UNLOCCODE" and "Place Name"  for record matching if UNLOCCODE is provided assuming that "Place Name" is always provided.
 
--Regarding the fields which were to be considered for changes, the exercise read as follows: "If any records has changes like vendor_id missing, latitude changed or place name changed then that record in output csv is to marked is_active false and a new record is to be added". I found that the field "latitude" sent to us by the vendor is not being stored in the company's internal records, i.e, it's not present in the "company-place.csv" file. These are the fields contined in the "company-place.csv" file: "id,name,is_active,created_at,updated_at,UNLOCODE,place_identity_id,vendor_place_id". No latitude field is to be found, thus it cannot be considered for changes. I then allowed for changes in the "name" field instead, provided to us as "Place Name" by the vendor. As a result, the following fields are considered for change with the vendor data input: "UNLOCCODE, Place ID, Place Name" instead of "UNLOCCODE, Place ID, Latitude".
+- Regarding the fields which were to be considered for changes, the exercise read as follows: "If any records has changes like vendor_id missing, latitude changed or place name changed then that record in output csv is to marked is_active false and a new record is to be added". I found that the field "latitude" sent to us by the vendor is not being stored in the company's internal records, i.e, it's not present in the "company-place.csv" file. These are the fields contined in the "company-place.csv" file: "id,name,is_active,created_at,updated_at,UNLOCODE,place_identity_id,vendor_place_id". No latitude field is to be found, thus it cannot be considered for changes. I then allowed for changes in the "name" field instead, provided to us as "Place Name" by the vendor. As a result, the following fields are considered for change with the vendor data input: "UNLOCCODE, Place ID, Place Name" instead of "UNLOCCODE, Place ID, Latitude".
 
-###### **Instructions to run**
+## **Instructions to run**
 
 The program provided is a Spring Boot application running on port 28094, so in order to run it you need to place your terminal window in the folder containing the project and run the command "mvn spring-boot:run". Another option is to run the application directly in your IDE by creating the appropiate run configurations.
 
@@ -34,10 +34,11 @@ To send the CSV file as the request body, the request body type must be selected
 
 I used POSTMAN to test the controller interface, so here's how it was configured:
 
-
+![alt text](https://github.com/EdelRX/place-updater/blob/master/POSTMAN_BODY.JPG?raw=true)
 
 The interface will return the full "output-place.csv" file for download, but the "Send and Download" option must be selected for the request:
 
+![alt text](https://github.com/EdelRX/place-updater/blob/master/POSTMAN_SEND_AND_DOWNLOAD.JPG?raw=true)
 
 Otherwise POSTMAN will draw the csv file's content at the request response section.
 
