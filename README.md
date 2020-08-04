@@ -1,11 +1,5 @@
 ## **Place Updater**
 
-I have completed this exercise as first step of the remote coding challenge sent to me by VAKT  part of their recruitment process for the Mid-Senior Java Developer position. 
-
-First of all, I'd like to thank VAKT for giving me this opportunity. I am very interested in the position and am happy to be considered.
-
-The exercise introductory description read as follows:
-
 A company receives data in csv format from a vendor every 2 weeks, this csv contains full set of the data, there is no representation in the file if a record has changed, not changed, added or deleted. 
 Company has a another csv that contains data in its own format. 
 
