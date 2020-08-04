@@ -47,6 +47,7 @@ If you would like to see the data stored in the temporary H2 database, you need 
 Then connect with the following details:
 
 
+![alt text](https://github.com/EdelRX/place-updater/blob/master/H2_CONSOLE.JPG?raw=true)
 
 
 
