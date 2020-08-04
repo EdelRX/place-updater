@@ -23,15 +23,15 @@ public class PlaceUpdaterServiceImpl implements IPlaceUpdaterService {
         for (PlaceUpdateRequest request : listRequests) {
             PlaceEntity place = null;
             if (request.getUNLOCODE() != null && !request.getUNLOCODE().isEmpty()) {
-                place = repository.findByUnlocodeAndName(request.getUNLOCODE().replaceAll("\\s+", ""),
-                        request.getPlaceName());
+                place = repository.findByUnlocodeAndNameAndIsActive(request.getUNLOCODE().replaceAll("\\s+", ""),
+                        request.getPlaceName(), "t");
             } else {
-                place = repository.findByName(request.getPlaceName());
+                place = repository.findByNameAndIsActive(request.getPlaceName(), "t");
             }
             if (place != null) {
                 PlaceEntity newPlace = compareChanges(place, request);
                 if (newPlace != null) {
-                    place.setIs_active("f");
+                    place.setIsActive("f");
                     place.setUpdated_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ")));
                     newPlace.setId(primaryKeyOffset);
 
@@ -51,7 +51,7 @@ public class PlaceUpdaterServiceImpl implements IPlaceUpdaterService {
 
         if (place.getVendor_place_id() == null || place.getVendor_place_id().isEmpty()) {
             newPlace = PlaceEntity.builder().vendor_place_id(request.getPlaceId())
-                    .is_active("t").created_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ")))
+                    .isActive("t").created_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ")))
                     .updated_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ"))).name(place.getName())
                     .unlocode(place.getUnlocode()).place_identity_id(place.getPlace_identity_id())
                     .build();
@@ -60,7 +60,7 @@ public class PlaceUpdaterServiceImpl implements IPlaceUpdaterService {
         if (place.getName() == null || !place.getName().equals(request.getPlaceName())) {
             if (newPlace == null) {
                 newPlace = PlaceEntity.builder().vendor_place_id(place.getVendor_place_id())
-                        .is_active("t").created_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ")))
+                        .isActive("t").created_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ")))
                         .updated_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ"))).unlocode(place.getUnlocode())
                         .place_identity_id(place.getPlace_identity_id())
                         .build();
@@ -68,10 +68,10 @@ public class PlaceUpdaterServiceImpl implements IPlaceUpdaterService {
             newPlace.setName(request.getPlaceName());
         }
 
-        if(!place.getUnlocode().equals(request.getUNLOCODE())){
+        if(!place.getUnlocode().equals(request.getUNLOCODE().replaceAll("\\s+", ""))){
             if (newPlace == null) {
                 newPlace = PlaceEntity.builder().vendor_place_id(place.getVendor_place_id())
-                        .is_active("t").created_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ")))
+                        .isActive("t").created_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ")))
                         .updated_at(ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ssZ"))).name(place.getName())
                         .place_identity_id(place.getPlace_identity_id())
                         .build();

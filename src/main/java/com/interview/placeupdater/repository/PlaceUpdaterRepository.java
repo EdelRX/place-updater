@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PlaceUpdaterRepository extends JpaRepository <PlaceEntity,Integer> {
 
-    PlaceEntity findByUnlocodeAndName(String unlocode, String name);
+    PlaceEntity findByUnlocodeAndNameAndIsActive(String unlocode, String name, String isActive);
 
-    PlaceEntity findByName(String name);
+    PlaceEntity findByNameAndIsActive(String name, String isActive);
 }

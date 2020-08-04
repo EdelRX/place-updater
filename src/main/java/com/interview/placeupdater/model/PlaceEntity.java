@@ -21,7 +21,8 @@ public class PlaceEntity {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     private String name;
-    private String is_active;
+    @JsonProperty("is_active")
+    private String isActive;
     @JsonProperty("UNLOCODE")
     private String unlocode;
     private String place_identity_id;

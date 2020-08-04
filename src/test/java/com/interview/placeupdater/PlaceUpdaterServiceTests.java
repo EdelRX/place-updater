@@ -63,29 +63,29 @@ public class PlaceUpdaterServiceTests {
     @Test
     void updatePlaceIdAndSuccess(){
         Mockito.when(repository.count()).thenReturn((long) listPlacesID.size());
-        Mockito.when(repository.findByUnlocodeAndName(Mockito.anyString(), Mockito.anyString())).thenReturn(listPlacesID.get(0));
+        Mockito.when(repository.findByUnlocodeAndNameAndIsActive(Mockito.anyString(), Mockito.anyString(), Mockito.anyString())).thenReturn(listPlacesID.get(0));
         Mockito.when(repository.findAll()).thenReturn(listUpdatedPlacesID);
 
         List<PlaceEntity> listResults = placeUpdaterService.updatePlaces(listRequestsPlaceID);
 
         Assertions.assertEquals("",listResults.get(0).getVendor_place_id());
-        Assertions.assertEquals("f",listResults.get(0).getIs_active());
+        Assertions.assertEquals("f",listResults.get(0).getIsActive());
         Assertions.assertEquals(listResults.get(1).getVendor_place_id(),listRequestsPlaceID.get(0).getPlaceId());
-        Assertions.assertEquals("t",listResults.get(1).getIs_active());
+        Assertions.assertEquals("t",listResults.get(1).getIsActive());
     }
 
     @Test
     void updateUnlocodeAndPlaceIdAndSuccess(){
         Mockito.when(repository.count()).thenReturn((long) listPlacesUnlocode.size());
-        Mockito.when(repository.findByName(Mockito.anyString())).thenReturn(listPlacesUnlocode.get(0));
+        Mockito.when(repository.findByNameAndIsActive(Mockito.anyString(), Mockito.anyString())).thenReturn(listPlacesUnlocode.get(0));
         Mockito.when(repository.findAll()).thenReturn(listUpdatedUnlocode);
 
         List<PlaceEntity> listResults = placeUpdaterService.updatePlaces(listRequestsUnlocode);
 
         Assertions.assertEquals("",listResults.get(0).getVendor_place_id());
-        Assertions.assertEquals("f",listResults.get(0).getIs_active());
+        Assertions.assertEquals("f",listResults.get(0).getIsActive());
         Assertions.assertEquals(listResults.get(1).getVendor_place_id(),listRequestsUnlocode.get(0).getPlaceId());
-        Assertions.assertEquals("t",listResults.get(1).getIs_active());
+        Assertions.assertEquals("t",listResults.get(1).getIsActive());
 
         Assertions.assertEquals("",listResults.get(1).getUnlocode());
         Assertions.assertEquals(listResults.get(0).getUnlocode(), listPlacesUnlocode.get(0).getUnlocode());
@@ -95,14 +95,14 @@ public class PlaceUpdaterServiceTests {
     @Test
     void updatePlaceNameAndSuccess(){
         Mockito.when(repository.count()).thenReturn((long) listPlacesName.size());
-        Mockito.when(repository.findByName(Mockito.anyString())).thenReturn(listPlacesName.get(0));
+        Mockito.when(repository.findByNameAndIsActive(Mockito.anyString(), Mockito.anyString())).thenReturn(listPlacesName.get(0));
         Mockito.when(repository.findAll()).thenReturn(listUpdatedPlaceName);
 
         List<PlaceEntity> listResults = placeUpdaterService.updatePlaces(listRequestsPlaceName);
 
         Assertions.assertEquals(listResults.get(1).getName(),listRequestsPlaceName.get(0).getPlaceName());
-        Assertions.assertEquals("t", listResults.get(1).getIs_active());
-        Assertions.assertEquals("f", listResults.get(0).getIs_active());
+        Assertions.assertEquals("t", listResults.get(1).getIsActive());
+        Assertions.assertEquals("f", listResults.get(0).getIsActive());
     }
 
 }

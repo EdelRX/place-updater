@@ -23,7 +23,7 @@ public class CsvUtils {
     public static void write(PrintWriter writer, List<PlaceEntity> placeEntities) {
         writer.write("id,name,is_active,created_at,updated_at,UNLOCODE,place_identity_id,vendor_place_id \n");
         for (PlaceEntity placeEntity : placeEntities) {
-            writer.write(placeEntity.getId() + "," + placeEntity.getName() + "," + placeEntity.getIs_active() +
+            writer.write(placeEntity.getId() + "," + placeEntity.getName() + "," + placeEntity.getIsActive() +
                     "," + placeEntity.getCreated_at() + "," + placeEntity.getUpdated_at() + "," +
                     placeEntity.getUnlocode() + "," + placeEntity.getPlace_identity_id() + "," + placeEntity.getVendor_place_id() +
                     "\n");
