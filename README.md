@@ -42,5 +42,11 @@ The interface will return the full "output-place.csv" file for download, but the
 
 Otherwise POSTMAN will draw the csv file's content at the request response section.
 
+If you would like to see the data stored in the temporary H2 database, you need only enter into the H2 console by typing http://localhost:28094/h2-console in your browser.
+
+Then connect with the following details:
+
+
+
 
 
